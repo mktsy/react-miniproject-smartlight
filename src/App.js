@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import {BrowserRouter as Router, Switch, Route, Link, useParams} from 'react-router-dom'
+import DashBoard from './pages/admin/dashBoard'
+import NotFound from './components/notFound'
+import UserForm from './components/userForm'
+import React, { useEffect } from 'react'
 
-function App() {
+function App(props) {
+  useEffect (() => {
+    
+    console.log(window.location.pathname);
+    const pathName = window.location.pathname
+    var mainPath = pathName.split('/')
+    console.log(mainPath[1]);
+  })
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <div>
+        <Switch>
+          <Route path={"/dashboard"} component={DashBoard} exact={true}/>
+          <Route path="/dashboard/:userinfo" component={DashBoard} />
+          <Route component={NotFound} />
+        </Switch>
+      </div>
+    </Router>
+    // <div> 
+    //   <UserInfoPage />
+    // </div>
+  )
+}
+function Okodas ()  {
+  return useParams()
 }
 
-export default App;
+export default App

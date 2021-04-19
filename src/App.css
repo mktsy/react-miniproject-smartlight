@@ -1,4 +1,12 @@
-.App {
+.fullPage {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+
+}
+
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +43,6 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
+
+
