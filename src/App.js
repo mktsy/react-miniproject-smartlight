@@ -1,9 +1,11 @@
 import './App.css'
-import {BrowserRouter as Router, Switch, Route, Link, useParams} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import DashBoard from './pages/admin/dashBoard'
-import NotFound from './components/notFound'
+import PageNotFound from './components/pageNotFound'
 import UserForm from './components/userForm'
 import React, { useEffect } from 'react'
+import UserViews from './pages/views/userViews'
+import Control from './components/control'
 
 function App(props) {
   useEffect (() => {
@@ -17,10 +19,12 @@ function App(props) {
     <Router>
       <div>
         <Switch>
-          <Route path={"/dashboard"} component={DashBoard} exact={true}/>
+          <Route path={"/"} component={UserViews} exact={true} />
+          <Route path={"/control"} component={UserViews} />
+          <Route path={"/dashboard"} component={DashBoard} />
           <Route path="/dashboard/:userinfo" component={DashBoard} />
           {/* <Route path="/eiei" component={NewSidebar}/> */}
-          <Route component={NotFound} />
+          <Route component={PageNotFound} />
         </Switch>
       </div>
     </Router>

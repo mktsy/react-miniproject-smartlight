@@ -9,17 +9,26 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import AddIcon from '@material-ui/icons/Add';
 import { BrowserRouter as Router, Switch, Route, Link, useHistory, Redirect } from 'react-router-dom'
-import NotFound from './notFound'
 
 
 export default class UserList extends React.Component {
     state = {
         user: [],
-        somaPage : null
+        somaPage : null,
+        token: ''
         // userId: '607a984447c81103a8076701'
     }
+    componentWillMount() {
+        console.log(window.location.pathname);
+        this.setState({
+            token: localStorage.getItem('token')
+        })
+    }
     async componentDidMount() {
-        this.setState({ user: await ConsumeAPI('get', 'users') })
+        // setInterval( async() => {
+            this.setState({ user: await ConsumeAPI('get', 'users', this.state.token) })
+        // }, 100);
+        
     }
   
     alertDelete = async (data) => {
@@ -33,14 +42,15 @@ export default class UserList extends React.Component {
             confirmButtonText: 'Yes, delete it!'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const result = await ConsumeAPI('delete', 'users/' + data._id)
+                const result = await ConsumeAPI('delete', 'users/' + data._id, this.state.token)
                 console.log(result)
                 Swal.fire(
                     'Deleted!',
                     `${data._name} has been deleted.`,
                     'success',
-                )
-                this.setState({ user: await ConsumeAPI('get', 'users') })
+                ).then(async () => {
+                    this.setState({ user: await ConsumeAPI('get', 'users', this.state.token) })
+                })
             }
         })
     }

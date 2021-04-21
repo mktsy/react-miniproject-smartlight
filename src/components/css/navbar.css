@@ -1,4 +1,8 @@
-.image {
+.image-admin {
     width: auto;
     height: 30px;
+}
+.image-user {
+    width: auto;
+    height: 26px;
 }

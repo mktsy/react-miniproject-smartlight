@@ -1,16 +1,17 @@
 import React from 'react'
 import axios from 'axios'
 
-const ConsumeAPI = async (method, path, data) => {
+const ConsumeAPI = async (method, path, token, data) => {
     // var self = this // self will now be referred to your component
     // var data = JSON.stringify({
     // })
     var config = {
         method: method,
-        url: 'http://localhost:5000/' + path,
-        headers: {
+        url: 'http://localhost:4000/api/' + path,
+        headers: { 
+            'Authorization': `Bearer ${token}`, 
             'Content-Type': 'application/json'
-        },
+          },
         data: data
     }
 
