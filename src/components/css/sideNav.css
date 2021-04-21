@@ -1,8 +1,10 @@
 .bgcolor {
-    background-color: #4E5154
+    background-color: #4E5154;
+    height: max-content
 }
 .fullPage {
     height: 100%;
     width: 100%;
     position: absolute;
+    background-color: #4E5154
 }

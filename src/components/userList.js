@@ -8,21 +8,20 @@ import Swal from 'sweetalert2'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import AddIcon from '@material-ui/icons/Add';
-import { BrowserRouter as Router, Switch, Route, Link, useHistory } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Link, useHistory, Redirect } from 'react-router-dom'
 import NotFound from './notFound'
 
 
 export default class UserList extends React.Component {
     state = {
-        user: []
+        user: [],
+        somaPage : null
         // userId: '607a984447c81103a8076701'
     }
     async componentDidMount() {
         this.setState({ user: await ConsumeAPI('get', 'users') })
     }
-    alertId = (id) => {
-        alert(id.name)
-    }
+  
     alertDelete = async (data) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -34,7 +33,8 @@ export default class UserList extends React.Component {
             confirmButtonText: 'Yes, delete it!'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                ConsumeAPI('delete', 'users/' + data._id)
+                const result = await ConsumeAPI('delete', 'users/' + data._id)
+                console.log(result)
                 Swal.fire(
                     'Deleted!',
                     `${data._name} has been deleted.`,
@@ -44,17 +44,17 @@ export default class UserList extends React.Component {
             }
         })
     }
-
-
-    // render() {
-    //     return (
-    //         <div></div>
-    //     )
+    // ChangePath = () => {
+    //     this.setState({somaPage:'/eiei'})
+    //     return <Redirect to={this.state.somaPage} />
+    //     window.location.pathname.push('/ewsfwef')
     // }
-
     render() {
+        // const {history} = this.props
+        // if(this.state.somaPage){
+        //     return <Redirect to={this.state.somaPage} />
+        // }
         return (
-
             <Container fluid>
                 <Row >
                     <Col >
@@ -112,11 +112,7 @@ export default class UserList extends React.Component {
                         })} */}
                     </Col>
                 </Row>
-                <Row>
-                    <Col>
-                        <Link to="/dashboard/userinfo" >Home</Link>
-                    </Col>
-                </Row>
+                {/* <Button onClick={this.ChangePath}>Button</Button> */}
             </Container>
         )
     }

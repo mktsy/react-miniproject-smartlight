@@ -1,10 +1,10 @@
 import React from 'react'
 import axios from 'axios'
 
-const ConsumeAPI = async (method, path) => {
+const ConsumeAPI = async (method, path, data) => {
     // var self = this // self will now be referred to your component
-    var data = JSON.stringify({
-    })
+    // var data = JSON.stringify({
+    // })
     var config = {
         method: method,
         url: 'http://localhost:5000/' + path,

@@ -19,6 +19,7 @@ function App(props) {
         <Switch>
           <Route path={"/dashboard"} component={DashBoard} exact={true}/>
           <Route path="/dashboard/:userinfo" component={DashBoard} />
+          {/* <Route path="/eiei" component={NewSidebar}/> */}
           <Route component={NotFound} />
         </Switch>
       </div>
@@ -27,9 +28,6 @@ function App(props) {
     //   <UserInfoPage />
     // </div>
   )
-}
-function Okodas ()  {
-  return useParams()
 }
 
 export default App
