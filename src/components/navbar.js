@@ -1,6 +1,7 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Navbar, Nav, NavDropdown, Image } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import './css/navbar.css'
 
 export default class NavBar extends React.Component {
@@ -9,17 +10,16 @@ export default class NavBar extends React.Component {
     }
     navbar() {
         var pathname = window.location.pathname
-        console.log(typeof(pathname));
         var bool = pathname.includes('dashboard')
         var name = pathname.includes('control')
         if (bool) {
             return <NavDashboard />
         } else {
-            if (name) return <NavLogout />
+            if (name) return <NavSetting />
             return <NavUser />
         }
-        var bool = pathname.includes('control')
-        if (bool) return <NavLogout />
+        // var bool = pathname.includes('control')
+        // if (bool) return <NavSetting />
     }
     render() {
         return (
@@ -43,7 +43,9 @@ const NavDashboard = () => {
                         <NavDropdown.Item href="#action/3.2">Help</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Sign out</NavDropdown.Item>
+                        
+                        <NavDropdown.Item onClick={clearLocalStorage}><Link to={`/`}>Sign out </Link></NavDropdown.Item>
+                        
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
@@ -55,15 +57,15 @@ const NavUser = () => {
                 <Navbar.Brand href="#home" className="smart">Smart Light</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto">
-
-                        <Nav.Link href="#link">Contract</Nav.Link>
-                    </Nav>
                 </Navbar.Collapse>
             </Navbar>)
 }
 
-const NavLogout = () => {
+const NavSetting = () => {
+    const test = () => {
+        console.log('eiei');
+    }
+    
     return (<Navbar bg="dark" variant="dark" expand="lg" className="nav">
     <Navbar.Brand href="#home" className="smart">Smart Light</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -75,16 +77,22 @@ const NavLogout = () => {
                         <span>
                             <Image className="image-user" src="https://www.interpharma.co.th/wp-content/uploads/2018/08/dog-1-300x214.png" roundedCircle />
                         </span>}>
-                        <NavDropdown.Item href="#action/3.1">Name</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.1" onClick={test}>Electricity bill</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.2">Contract</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2" >Contract</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Sign out</NavDropdown.Item>
+                        <Link to={`/`}>
+                        <NavDropdown.Item onClick={clearLocalStorage}>Sign out</NavDropdown.Item>
+                        </Link>
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
         
     </Navbar.Collapse>
 </Navbar>)
+}
+
+function clearLocalStorage() {
+    localStorage.removeItem('token')
 }

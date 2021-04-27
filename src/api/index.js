@@ -1,4 +1,3 @@
-import React from 'react'
 import axios from 'axios'
 
 const ConsumeAPI = async (method, path, token, data) => {
@@ -12,7 +11,7 @@ const ConsumeAPI = async (method, path, token, data) => {
             'Authorization': `Bearer ${token}`, 
             'Content-Type': 'application/json'
           },
-        data: data
+        data: JSON.stringify(data)
     }
 
     return await axios(config)

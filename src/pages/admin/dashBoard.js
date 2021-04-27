@@ -7,6 +7,7 @@ import UserList from '../../components/userList'
 import UserForm from '../../components/userForm'
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import './css/dashBoard.css'
+import ChangePassword from '../../components/changePassword'
 
 
 export default class DashBoard extends React.Component {
@@ -23,8 +24,9 @@ export default class DashBoard extends React.Component {
                         <SideNav />
                     </Col>
                     <Col xs={{ span: 10, offset: 2 }}>
-                    <Route path="/dashboard" component={UserList} exact={true}/>
-                    <Route path="/dashboard/:userinfo" component={UserForm} />
+                    <Route exact path="/dashboard" component={UserList} exact={true}/>
+                    <Route exact path="/dashboard/userinfo/:userinfo" component={UserForm} />
+                    <Route exact path="/dashboard/changepassword" component={ChangePassword} />
                         {/* <UserList /> */}
                     </Col>
                 </Row>

@@ -14,7 +14,8 @@ export default class UserForm extends React.Component {
         method: 'post',
         buttonType: 'success',
         confirmType: 'create',
-        token: ''
+        token: '',
+        read: false
         // button: 'Create'
         // userId: '607a984447c81103a8076701'
     }
@@ -37,7 +38,9 @@ export default class UserForm extends React.Component {
                 method: 'patch',
                 buttonType: 'warning',
                 page: '',
-                confirmType: 'update'
+                confirmType: 'update',
+                read: true
+
                 // button: 'Save'
             })
         }
@@ -60,8 +63,7 @@ export default class UserForm extends React.Component {
             password,
             pin, role
         }
-        var con_data = JSON.stringify(data)
-        this.alertConfirm(con_data)
+        this.alertConfirm(data)
     }
     alertCancel = () => {
         Swal.fire({
@@ -78,7 +80,7 @@ export default class UserForm extends React.Component {
             }
         })
     }
-    alertConfirm = (con_data) => {
+    alertConfirm = (data) => {
         console.log(this.state.confirmType);
         Swal.fire({
             title: `Confirm ${this.state.confirmType} !`,
@@ -87,22 +89,30 @@ export default class UserForm extends React.Component {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: `Yes, ${this.state.confirmType} user data.`
-        }).then((result) => {
+            confirmButtonText: `Yes, ${this.state.confirmType} user data.`,
+        }).then( async (result) => {
             if (result.isConfirmed) {
                 var url = 'users'
                 url += this.state.userId != 'create' ? '/' + this.state.userId : ''
-                ConsumeAPI(this.state.method, url, this.state.token, con_data)
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: `User data has been ${this.state.confirmType}.`,
-                    showConfirmButton: false,
-                    timer: 1000
-                })
+                const cb = await ConsumeAPI(this.state.method, url, this.state.token, data)
+                if (cb != undefined) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: `User data has been ${this.state.confirmType}.`,
+                        text: `User data ${this.state.confirmType} successfully.`
+                    })
                     .then(() => {
                         this.setState({ page: '/dashboard' })
                     })
+                } else {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: `Email exist.`,
+                        text: `please change email.`,
+                    })
+                }
                 // setTimeout(() => {
                 //     this.setState({page: '/dashboard'})
                 // }, 1000)   
@@ -127,7 +137,7 @@ export default class UserForm extends React.Component {
                             <Col>
                                 <Form.Group >
                                     <Form.Label>First Name</Form.Label>
-                                    <Form.Control type="text" placeholder="First Name" defaultValue={this.state.user.name} ref={(input) => this.name = input} required/>
+                                    <Form.Control type="text" placeholder="First Name" defaultValue={this.state.user.name} ref={(input) => this.name = input} required />
                                 </Form.Group>
                             </Col>
                             <Col>
@@ -139,17 +149,17 @@ export default class UserForm extends React.Component {
                         </Row>
                         <Form.Group >
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="name@example.com" defaultValue={this.state.user.email} ref={(input) => this.email = input} required/>
+                            <Form.Control type="email" placeholder="name@example.com" defaultValue={this.state.user.email} ref={(input) => this.email = input} required readOnly={this.state.read}/>
                         </Form.Group>
                         <Form.Group >
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" defaultValue={this.state.user.password} ref={(input) => this.password = input} required/>
+                            <Form.Control type="password" placeholder="Password" defaultValue={this.state.user.password} ref={(input) => this.password = input} required readOnly={this.state.read}/>
                         </Form.Group>
                         <Row>
                             <Col>
                                 <Form.Group >
                                     <Form.Label>Pin</Form.Label>
-                                    <Form.Control type="password" placeholder="1112" defaultValue={this.state.user.pin} ref={(input) => this.pin = input} required/>
+                                    <Form.Control type="password" placeholder="1112" defaultValue={this.state.user.pin} ref={(input) => this.pin = input} required readOnly={this.state.read}/>
                                 </Form.Group>
                             </Col>
                             <Col>
@@ -162,15 +172,18 @@ export default class UserForm extends React.Component {
                                 </Form.Group>
                             </Col>
                         </Row>
-                        <Row className='ml-5 pl-5' >
-                            <Col xs={{ span: 1, offset: 10 }}>
-                                <Button className='mLeft' variant={this.state.buttonType} type="submit">
+                        <Row >
+                            <Col className="text-right">
+                            <Button variant={this.state.buttonType} type="submit">
                                     {icon}
                                 </Button>
-                            </Col>
-                            <Col xs={1}>
                                 <Button className='ml-3' variant="danger" onClick={(this.alertCancel)}>Cancel</Button>
                             </Col>
+                            {/* <Col xs={{ span: 2, offset: 8 }}>
+                                
+                            </Col>
+                            <Col xs={2}>
+                            </Col> */}
                             {/* <Col >
                                 <Button variant="danger">eiei</Button>
                             </Col> */}

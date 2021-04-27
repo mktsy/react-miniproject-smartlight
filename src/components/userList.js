@@ -1,20 +1,19 @@
 import React from 'react'
-import { Container, Row, Col, Table, Button, Card } from 'react-bootstrap'
+import { Container, Row, Col, Table, Button, Card, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ConsumeAPI from '../api/index'
-import './css/userInfo.css'
+import './css/userList.css'
 import Swal from 'sweetalert2'
-// import AddIcon from '@material-ui/icons/Add'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import AddIcon from '@material-ui/icons/Add';
-import { BrowserRouter as Router, Switch, Route, Link, useHistory, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 export default class UserList extends React.Component {
     state = {
         user: [],
-        somaPage : null,
+        somaPage: null,
         token: ''
         // userId: '607a984447c81103a8076701'
     }
@@ -26,11 +25,11 @@ export default class UserList extends React.Component {
     }
     async componentDidMount() {
         // setInterval( async() => {
-            this.setState({ user: await ConsumeAPI('get', 'users', this.state.token) })
+        this.setState({ user: await ConsumeAPI('get', 'users', this.state.token) })
         // }, 100);
-        
+
     }
-  
+
     alertDelete = async (data) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -46,7 +45,7 @@ export default class UserList extends React.Component {
                 console.log(result)
                 Swal.fire(
                     'Deleted!',
-                    `${data._name} has been deleted.`,
+                    `${result.result.name} has been deleted.`,
                     'success',
                 ).then(async () => {
                     this.setState({ user: await ConsumeAPI('get', 'users', this.state.token) })
@@ -79,7 +78,7 @@ export default class UserList extends React.Component {
                                             <th className="columnEmailSize">Email</th>
                                             <th className="columnRoleSize">Role</th>
                                             <th className="columnButtonSize text-center">
-                                                <Link to={`/dashboard/create`}>
+                                                <Link to={`/dashboard/userinfo/create`}>
                                                     <Button variant="success" size="sm" className='mr-3' ><AddIcon fontSize="small" /></Button>
                                                 </Link>
                                             </th>
@@ -94,11 +93,17 @@ export default class UserList extends React.Component {
                                                     <td>{callback.lastName}</td>
                                                     <td>{callback.email}</td>
                                                     <td>{callback.role}</td>
-                                                    <td className="text-center">
-                                                        <Link to={`/dashboard/${callback._id}`}>
-                                                            <Button variant="warning" size="sm" className='mr-3' ><EditIcon fontSize="small" /></Button>
-                                                        </Link>
-                                                        <Button variant="danger" size="sm" onClick={() => this.alertDelete(callback)}><DeleteIcon fontSize="small" /></Button>
+                                                    <td>
+                                                        <Col className="text-center">
+                                                            <span className="ml-2">
+                                                            <Link to={`/dashboard/userinfo/${callback._id}`}>
+                                                                <Button variant="warning" size="sm"><EditIcon fontSize="small" /></Button>
+                                                            </Link>
+                                                            </span><span className="ml-2"></span>
+                                                            <span>
+                                                            <Button variant="danger" size="sm" onClick={() => this.alertDelete(callback)} ><DeleteIcon fontSize="small" /></Button>
+                                                            </span>
+                                                        </Col>
                                                     </td>
                                                 </tr>
                                                 // <Route path="/dashboard/607a96a1f7475e14c412537f" component={NotFound} />
