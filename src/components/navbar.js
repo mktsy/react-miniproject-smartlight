@@ -45,9 +45,7 @@ const NavDashboard = () => {
                         <NavDropdown.Item href="#action/3.2">Help</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        
-                        <NavDropdown.Item onClick={clearLocalStorage}><Link to={`/`}>Sign out </Link></NavDropdown.Item>
-                        
+                        <NavDropdown.Item onClick={clearLocalStorage}>Sign out</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
@@ -66,14 +64,13 @@ const NavUser = () => {
 const NavSetting = () => {
     const getBill = async () => {
         const token = localStorage.getItem('token')
-        const bill = await ConsumeAPI('get', 'lastbill', token)
+        var bill = await ConsumeAPI('get', 'lastbill', token)
         const id = bill._id
-        const sDate = new Date(bill.startDate).toLocaleDateString()
-        const sDateM = sDate.split('/')
-        const now = new Date().toLocaleDateString()
-        const nowM = now.split('/')
-        
-        if (sDateM[0] == nowM[1]) {
+        const sDate = new Date(bill.startDate).toISOString()
+        const dataMonth= sDate.slice(5, 7)
+        const now = new Date(2021,4,2).toISOString()
+        const nowMonth = now.slice(5, 7)
+        if (dataMonth == nowMonth) {
             await ConsumeAPI('patch', 'bill/' + id, token)
         } else {
             await ConsumeAPI('patch', 'bill/' + id, token)
@@ -92,7 +89,9 @@ const NavSetting = () => {
     }
     
     return (<Navbar bg="dark" variant="dark" expand="lg" className="nav">
+    <Link to={`/control`}>
     <Navbar.Brand href="#home" className="smart">Smart Lighting</Navbar.Brand>
+    </Link>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -104,8 +103,10 @@ const NavSetting = () => {
                         </span>}>
                         <NavDropdown.Item onClick={getBill}>Electricity bill</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.2" >Contract</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
+                        <Link to={`/control/history`}>
+                        <NavDropdown.Item >History</NavDropdown.Item>
+                        </Link>
+                        <NavDropdown.Item >Settings</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item onClick={clearLocalStorage}>Sign out</NavDropdown.Item>
                         

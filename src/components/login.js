@@ -42,10 +42,10 @@ export default class Login extends React.Component {
     }
     render() {
         if (this.state.role == 'Admin') {
-            return <Redirect to={'/dashboard'} />
+            return <Redirect to={`/dashboard`} />
         } 
         if (this.state.role == 'User') {
-            return <Redirect to={'/control'} />
+            return <Redirect to={`/control`} />
         }
         return (
             <main>

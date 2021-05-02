@@ -24,7 +24,7 @@ export default class History extends React.Component {
     }
     render() {
         return (
-            <Container fluid>
+            <Container>
                 <Row >
                     <Col >
                         <Card className="mt-5">
@@ -33,33 +33,19 @@ export default class History extends React.Component {
                                 <Table striped bordered hover responsive className="table">
                                     <thead>
                                         <tr>
-                                            <th className="columnNameSize">Name</th>
-                                            <th className="columnLNameSize">Last Name</th>
-                                            <th className="columnButtonSize text-center">
-                                                <Link to={`/dashboard/userinfo/create`}>
-                                                    <Button variant="success" size="sm" className='mr-3' ><AddIcon fontSize="small" /></Button>
-                                                </Link>
-                                            </th>
+                                            <th className="columnNoSize">No.</th>
+                                            <th className="columnBillSize">Price (baht)</th>
+                                            <th className="columnDateSize">Date (y/m/d)</th>
+                                             
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {this.state.bill.map((callback, index) => {
                                             return (
                                                 <tr key={index}>
+                                                    <td>{index+1}</td>
                                                     <td>{callback.bill}</td>
-                                                    <td>{callback.startDate}</td>
-                                                    <td>
-                                                        <Col className="text-center">
-                                                            <span className="ml-2">
-                                                            <Link to={`/dashboard/userinfo/${callback._id}`}>
-                                                                <Button variant="warning" size="sm"><EditIcon fontSize="small" /></Button>
-                                                            </Link>
-                                                            </span><span className="ml-2"></span>
-                                                            <span>
-                                                            <Button variant="danger" size="sm"><DeleteIcon fontSize="small" /></Button>
-                                                            </span>
-                                                        </Col>
-                                                    </td>
+                                                    <td>{callback.startDate.slice(0, 10)}</td>
                                                 </tr>
                                             )
                                         })}
