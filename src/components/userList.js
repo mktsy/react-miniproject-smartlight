@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col, Table, Button, Card, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { Container, Row, Col, Table, Button, Card } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ConsumeAPI from '../services/index'
 import './css/userList.css'
@@ -13,9 +13,7 @@ import { Link } from 'react-router-dom'
 export default class UserList extends React.Component {
     state = {
         user: [],
-        somaPage: null,
         token: ''
-        // userId: '607a984447c81103a8076701'
     }
     componentWillMount() {
         console.log(window.location.pathname);
@@ -24,9 +22,7 @@ export default class UserList extends React.Component {
         })
     }
     async componentDidMount() {
-        // setInterval( async() => {
         this.setState({ user: await ConsumeAPI('get', 'users', this.state.token) })
-        // }, 100);
 
     }
 

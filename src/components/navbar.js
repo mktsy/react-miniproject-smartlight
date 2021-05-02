@@ -32,7 +32,7 @@ export default class NavBar extends React.Component {
 
 const NavDashboard = () => {
     return (<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed='top'>
-            <Navbar.Brand href="#home">Smart Lighting</Navbar.Brand>
+            <Navbar.Brand ><img className="image-logo" src="https://scontent.furt1-1.fna.fbcdn.net/v/t1.15752-9/181847892_118352763608100_5795919155622860752_n.png?_nc_cat=102&ccb=1-3&_nc_sid=ae9488&_nc_eui2=AeGzG8n8lbzelzCPSQ8U29JqU9gpF2We2gNT2CkXZZ7aA-OudBaJd3wTYyPZoY3NRZPCj3S-AljD3kIRGUwWBOXl&_nc_ohc=coewRcGaqdsAX-3K7XG&_nc_ht=scontent.furt1-1.fna&oh=f83ed2b138f2a35dae9b2f5453b763d6&oe=60B547A7" /> Toy</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto">
@@ -40,12 +40,7 @@ const NavDashboard = () => {
                         <span>
                             <Image className="image-admin" src="https://www.westsidepetvet.com/images/template/intro-cat.png" roundedCircle />
                         </span>}>
-                        <NavDropdown.Item href="#action/3.1">Name</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.2">Help</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item onClick={clearLocalStorage}><Link to={`/`} activeClassName="active">Sign out</Link></NavDropdown.Item>
+                        <NavDropdown.Item onClick={clearLocalStorage}><Link to={`/`} className="text-dark" activeClassName="active">Sign out</Link></NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
@@ -54,7 +49,7 @@ const NavDashboard = () => {
 
 const NavUser = () => {
     return (<Navbar bg="dark" variant="dark" expand="lg" className="nav">
-                <Navbar.Brand href="#home" className="smart">Smart Lighting</Navbar.Brand>
+                <Navbar.Brand className="smart"><img className="image-logo" src="https://scontent.furt1-1.fna.fbcdn.net/v/t1.15752-9/181847892_118352763608100_5795919155622860752_n.png?_nc_cat=102&ccb=1-3&_nc_sid=ae9488&_nc_eui2=AeGzG8n8lbzelzCPSQ8U29JqU9gpF2We2gNT2CkXZZ7aA-OudBaJd3wTYyPZoY3NRZPCj3S-AljD3kIRGUwWBOXl&_nc_ohc=coewRcGaqdsAX-3K7XG&_nc_ht=scontent.furt1-1.fna&oh=f83ed2b138f2a35dae9b2f5453b763d6&oe=60B547A7" /> Smart Lighting</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 </Navbar.Collapse>
@@ -90,7 +85,7 @@ const NavSetting = () => {
     
     return (<Navbar bg="dark" variant="dark" expand="lg" className="nav">
     <Link to={`/control`}>
-    <Navbar.Brand href="#home" className="smart">Smart Lighting</Navbar.Brand>
+    <Navbar.Brand className="smart"><img className="image-logo" src="https://scontent.furt1-1.fna.fbcdn.net/v/t1.15752-9/181847892_118352763608100_5795919155622860752_n.png?_nc_cat=102&ccb=1-3&_nc_sid=ae9488&_nc_eui2=AeGzG8n8lbzelzCPSQ8U29JqU9gpF2We2gNT2CkXZZ7aA-OudBaJd3wTYyPZoY3NRZPCj3S-AljD3kIRGUwWBOXl&_nc_ohc=coewRcGaqdsAX-3K7XG&_nc_ht=scontent.furt1-1.fna&oh=f83ed2b138f2a35dae9b2f5453b763d6&oe=60B547A7" /> Home</Navbar.Brand>
     </Link>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
@@ -102,11 +97,11 @@ const NavSetting = () => {
                             <Image className="image-user" src="https://www.interpharma.co.th/wp-content/uploads/2018/08/dog-1-300x214.png" roundedCircle />
                         </span>}>
                         <NavDropdown.Item onClick={getBill}>Electricity bill</NavDropdown.Item>
-                        <NavDropdown.Item ><Link to={`/control/history`} activeClassName="active">History</Link></NavDropdown.Item>
+                        <NavDropdown.Item ><Link to={`/control/history`} className="text-dark" activeClassName="active">History</Link></NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item >Change password</NavDropdown.Item>
+                        <NavDropdown.Item ><Link to={`/control/changepassword`} className="text-dark" activeClassName="active">Change password</Link></NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item onClick={clearLocalStorage}><Link to={`/`} activeClassName="active">Sign out</Link></NavDropdown.Item>
+                        <NavDropdown.Item  onClick={clearLocalStorage}><Link to={`/`} className="text-dark" activeClassName="active">Sign out</Link></NavDropdown.Item>
                         
                     </NavDropdown>
                 </Nav>

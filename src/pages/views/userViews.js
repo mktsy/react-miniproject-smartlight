@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Login from '../../components/login'
 import Navbar from '../../components/navbar'
 import Control from '../../components/control'
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import ChangePassword from '../../components/changePassword'
 import History from '../../components/history'
 
@@ -12,11 +12,11 @@ export default class UserViews extends React.Component {
         return (
             <Container fluid>
                 <Row>
-                    <Col xs='12' className="p-0">
+                    <Col xs='12' className="p-0 ">
                         <Navbar />
                     </Col> 
                 </Row>
-                <Row  >
+                <Row  className="mb-5">
                     <Col xs="12" className="p-0" style={{position: 'fixed', height:'100%'}}>
                         <Route path="/" component={Login} exact={true}/>
                         <Route exact path="/control" component={Control} />

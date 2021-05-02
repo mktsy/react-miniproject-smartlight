@@ -10,7 +10,7 @@ export default class SideNav extends React.Component {
         return (
             <Container fluid className="bgcolor">
                 <Row align="center">
-                    <Col md="12" className="mt-2" >
+                    <Col md="12" className="mt-5" >
                         <Link to={`/dashboard`}>
                         <Button variant="secondary">Dashboard</Button>
                         </Link>

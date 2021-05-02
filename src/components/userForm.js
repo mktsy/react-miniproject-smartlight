@@ -48,7 +48,7 @@ export default class UserForm extends React.Component {
 
     }
     handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         const name = this.name.value
         const lastName = this.lastName.value
         const email = this.email.value

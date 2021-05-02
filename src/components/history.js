@@ -1,13 +1,9 @@
 import React from 'react'
-import { Container, Row, Col, Table, Button, Card} from 'react-bootstrap'
+import { Container, Row, Col, Table, Card} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ConsumeAPI from '../services/index'
 import './css/userList.css'
-import Swal from 'sweetalert2'
-import EditIcon from '@material-ui/icons/Edit'
-import DeleteIcon from '@material-ui/icons/Delete'
-import AddIcon from '@material-ui/icons/Add';
-import { Link } from 'react-router-dom'
+
 
 export default class History extends React.Component {
     state = {

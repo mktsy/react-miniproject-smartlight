@@ -38,7 +38,6 @@ export default class Login extends React.Component {
             title: 'Login failed',
             text: 'Please check your email or password.',
           })
-    
     }
     render() {
         if (this.state.role == 'Admin') {
@@ -52,7 +51,7 @@ export default class Login extends React.Component {
                 <Container fluid>
                     <Row className="login-fullPage">
                         <Col md={3} className="m-auto " >
-                        <Card className="p-5">
+                        <Card className="p-5 mb-5">
                             <Form onSubmit={this.handleSubmit}>
                                 <h1>Sign In</h1> <br></br>
                                 <Form.Group controlId="formBasicEmail">

@@ -21,8 +21,6 @@ function App(props) {
     } else {
       setisAutheticated(false);
     }
-    console.log(token);
-    console.log(isAutheticated)
   })
   return (
     <Router>

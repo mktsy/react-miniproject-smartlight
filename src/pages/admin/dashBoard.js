@@ -5,7 +5,7 @@ import Navbar from '../../components/navbar'
 import SideNav from '../../components/sideNav'
 import UserList from '../../components/userList'
 import UserForm from '../../components/userForm'
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import './css/dashBoard.css'
 import ChangePassword from '../../components/changePassword'
 
