@@ -45,7 +45,7 @@ const NavDashboard = () => {
                         <NavDropdown.Item href="#action/3.2">Help</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item onClick={clearLocalStorage}>Sign out</NavDropdown.Item>
+                        <NavDropdown.Item onClick={clearLocalStorage}><Link to={`/`} activeClassName="active">Sign out</Link></NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
@@ -102,13 +102,11 @@ const NavSetting = () => {
                             <Image className="image-user" src="https://www.interpharma.co.th/wp-content/uploads/2018/08/dog-1-300x214.png" roundedCircle />
                         </span>}>
                         <NavDropdown.Item onClick={getBill}>Electricity bill</NavDropdown.Item>
+                        <NavDropdown.Item ><Link to={`/control/history`} activeClassName="active">History</Link></NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <Link to={`/control/history`}>
-                        <NavDropdown.Item >History</NavDropdown.Item>
-                        </Link>
-                        <NavDropdown.Item >Settings</NavDropdown.Item>
+                        <NavDropdown.Item >Change password</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item onClick={clearLocalStorage}>Sign out</NavDropdown.Item>
+                        <NavDropdown.Item onClick={clearLocalStorage}><Link to={`/`} activeClassName="active">Sign out</Link></NavDropdown.Item>
                         
                     </NavDropdown>
                 </Nav>

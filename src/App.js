@@ -29,9 +29,9 @@ function App(props) {
       <div>
         <Switch>
           <Route exact path={"/"} component={UserViews} exact={true} />
-          <GuardedRoute path={"/control"} component={UserViews} auth={isAutheticated}/>
-          <GuardedRoute exact path="/control/history" component={UserViews} auth={isAutheticated} />
-          <GuardedRoute exact path="/control/changepassword/" component={UserViews} auth={isAutheticated}/>
+          <GuardedRoute exact path={"/control"} component={UserViews} auth={isAutheticated}/>
+          <GuardedRoute exact path={"/control/history"} component={UserViews} auth={isAutheticated} />
+          <GuardedRoute exact path={"/control/changepassword/"} component={UserViews} auth={isAutheticated}/>
           <GuardedRoute exact path={"/dashboard"} component={DashBoard} auth={isAutheticated}/>
           <GuardedRoute exact path="/dashboard/userinfo/:userinfo" component={DashBoard} auth={isAutheticated}/>
           <Route component={PageNotFound} />
