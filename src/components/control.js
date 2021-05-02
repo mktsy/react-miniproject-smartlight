@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/control.css'
 import TextField from '@material-ui/core/TextField'
 import Swal from 'sweetalert2'
-import ConsumeAPI from '../api/index'
+import ConsumeAPI from '../services/index'
 
 export default class Control extends React.Component {
     state = {
@@ -21,7 +21,9 @@ export default class Control extends React.Component {
         token: '',
         color: 'off'
     }
-
+    componentWillMount() {
+        this.setState({token: localStorage.getItem('token')})
+    }
     async componentDidMount() {
         const offImg = 'https://scontent.furt1-1.fna.fbcdn.net/v/t1.15752-9/178731311_821295132073362_7773809162742776955_n.png?_nc_cat=111&ccb=1-3&_nc_sid=ae9488&_nc_eui2=AeHQJvt3nZXBQ1woXJ4PaEwmSUP68acUgjdJQ_rxpxSCN4GWSI1xf5gr7Tpw7NvGu2MN4R7yPIgO2NDMsLj0Jcug&_nc_ohc=dETCz2eANy8AX8GcqFr&_nc_ht=scontent.furt1-1.fna&oh=45b16425d4ce5d1c20ba36029e92b41f&oe=60AA5A51'
         const whiteImg = 'https://scontent.furt1-1.fna.fbcdn.net/v/t1.15752-9/178594467_293718369009562_5957749676384003173_n.png?_nc_cat=107&ccb=1-3&_nc_sid=ae9488&_nc_eui2=AeHO3R0Sfy3xMsdphyM5Zu8jQC-V0PrGmwBAL5XQ-sabANcKqcf3jH3rQDbmneEHCklHyiIpiGkdKXNwKkkGZtgt&_nc_ohc=P7d-T5TQbTcAX-jWzsS&tn=HF4DCV1mt-785d2c&_nc_ht=scontent.furt1-1.fna&oh=f8042b127b218678411e931cd11d8079&oe=60AA5992'
@@ -31,15 +33,14 @@ export default class Control extends React.Component {
         var pushImg = []
         pushImg.push(offImg, redImg, greenImg, blueImg, whiteImg)
         this.setState({ 
-            lights: await ConsumeAPI('get', 'lights'),
+            lights: await ConsumeAPI('get', 'lights', this.state.token),
             image: pushImg,
-            token: localStorage.getItem('token')
             // image: offImg, onImg, redImg, greenImg, blueImg
         })
     }
     onOffLight = id => async () => {
         const url = 'lights/state/' + id
-        this.setState({ light: await ConsumeAPI('get', 'lights/' + id)})
+        this.setState({ light: await ConsumeAPI('get', 'lights/' + id, this.state.token)})
         if (this.state.light.state == false) {
             var data = {
                 state: true,
@@ -54,7 +55,7 @@ export default class Control extends React.Component {
             this.setState({light: await ConsumeAPI('patch', url, this.state.token, data)})
             console.log(this.state.light);
         }
-        this.setState({lights: await ConsumeAPI('get', 'lights')})
+        this.setState({lights: await ConsumeAPI('get', 'lights', this.state.token)})
     }
     alertColor = id => async () => {
         Swal.fire({
@@ -63,7 +64,6 @@ export default class Control extends React.Component {
             showCancelButton: true,
             inputOptions: this.state.colorValue,
             inputValidator: async (value) => {
-                console.log('eiei');
                 console.log(this.state.light.state);
                 if (this.state.light.state == true) {
                     console.log('eiei');
@@ -77,7 +77,9 @@ export default class Control extends React.Component {
                 }      
             }
         }).then(async () => {
-            this.setState({ lights: await ConsumeAPI('get', 'lights')})
+            this.setState({ 
+                lights: await ConsumeAPI('get', 'lights', this.state.token)
+            })
         })
     }
     handleChange = (e) => {
@@ -143,7 +145,6 @@ export default class Control extends React.Component {
                                                 </div>
                                             </div>
                                         </Col>
-                                        // <div>{data.name}</div>
                                     )
                                 })}
                             </Row>
@@ -151,20 +152,6 @@ export default class Control extends React.Component {
                         </Col>
                     </Row>
                     </Card>
-
-                    {/* {setTimeout(() => {
-                            {this.state.light.map((data, index) => {
-                                return(
-                                    <div key={index}>
-                                        <div>{index}</div>
-                                        <div>index</div>
-                                    </div>
-                                )
-                            })}
-                            
-                        }, 1000)} */}
-
-
                 </Container>
             </main>
         );

@@ -2,7 +2,7 @@ import React from "react"
 import { Button, Form, Container, Row, Col, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/login.css'
-import ConsumeAPI from '../api/index'
+import ConsumeAPI from '../services/index'
 import Swal from 'sweetalert2'
 import { Redirect } from 'react-router-dom'
 

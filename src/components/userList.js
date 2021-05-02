@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row, Col, Table, Button, Card, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import ConsumeAPI from '../api/index'
+import ConsumeAPI from '../services/index'
 import './css/userList.css'
 import Swal from 'sweetalert2'
 import EditIcon from '@material-ui/icons/Edit'

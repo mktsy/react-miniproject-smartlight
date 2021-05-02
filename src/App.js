@@ -2,11 +2,9 @@ import './App.css'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import DashBoard from './pages/admin/dashBoard'
 import PageNotFound from './components/pageNotFound'
-import UserForm from './components/userForm'
 import React, { useEffect, useState } from 'react'
 import UserViews from './pages/views/userViews'
-import Control from './components/control'
-import ChangePassword from './components/changePassword'
+import GuardedRoute from './services/guardRoute'
 
 // const authentication = {
 //   isLoggedIn: false,
@@ -14,14 +12,9 @@ import ChangePassword from './components/changePassword'
 //     (token)? isLoggedIn: true
 // }
 function App(props) {
-  const[isAutheticated, setisAutheticated] = useState(false);
+  const[isAutheticated, setisAutheticated] = useState(true);
 
   useEffect (() => {
-    console.log(isAutheticated)
-    // console.log(window.location.pathname);
-    // const pathName = window.location.pathname
-    // var mainPath = pathName.split('/')
-    // console.log(mainPath[1]);
     const token = localStorage.getItem('token')
     if (token) {
       setisAutheticated(true);
@@ -36,11 +29,11 @@ function App(props) {
       <div>
         <Switch>
           <Route exact path={"/"} component={UserViews} exact={true} />
-          <Route path={"/control"} component={UserViews} />
-          <Route exact path={"/dashboard"} component={DashBoard} />
-          <Route exact path="/dashboard/userinfo/:userinfo" component={DashBoard} />
-          <Route exact path="/dashboard/changepassword/" component={DashBoard} />
-          {/* <Route path="/eiei" component={NewSidebar}/> */}
+          <GuardedRoute path={"/control"} component={UserViews} auth={isAutheticated}/>
+          <GuardedRoute exact path="/control/history" component={UserViews} auth={isAutheticated} />
+          <GuardedRoute exact path="/control/changepassword/" component={UserViews} auth={isAutheticated}/>
+          <GuardedRoute exact path={"/dashboard"} component={DashBoard} auth={isAutheticated}/>
+          <GuardedRoute exact path="/dashboard/userinfo/:userinfo" component={DashBoard} auth={isAutheticated}/>
           <Route component={PageNotFound} />
         </Switch>
       </div>

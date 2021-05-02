@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Card, Row, Col, Button } from 'react-bootstrap'
-import ConsumeAPI from '../api/index'
+import ConsumeAPI from '../services/index'
 import SaveIcon from '@material-ui/icons/Save';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import './css/userForm.css'

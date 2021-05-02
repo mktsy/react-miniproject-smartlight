@@ -4,6 +4,8 @@ import Login from '../../components/login'
 import Navbar from '../../components/navbar'
 import Control from '../../components/control'
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
+import ChangePassword from '../../components/changePassword'
+import History from '../../components/history'
 
 export default class UserViews extends React.Component {
     render() {
@@ -12,18 +14,15 @@ export default class UserViews extends React.Component {
                 <Row>
                     <Col xs='12' className="p-0">
                         <Navbar />
-                    </Col>
+                    </Col> 
                 </Row>
                 <Row  >
                     <Col xs="12" className="p-0" style={{position: 'fixed', height:'100%'}}>
                         <Route path="/" component={Login} exact={true}/>
-                        <Route path="/control" component={Control} />
+                        <Route exact path="/control" component={Control} />
+                        <Route exact path="/control/changepassword/" component={ChangePassword} />
+                        <Route exact path="/control/history" component={History} />
                     </Col>
-                    {/* <Col xs={{ span: 10, offset: 2 }}>
-                    <Route path="/dashboard" component={UserList} exact={true}/>
-                    <Route path="/dashboard/:userinfo" component={UserForm} />
-                        <UserList />
-                    </Col> */}
                 </Row>
             </Container>
         )
